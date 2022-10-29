@@ -6,6 +6,11 @@ SET UNIQUE_CHECKS=0;
 SET FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
+-- Delete triggers before reconstruction
+DROP TRIGGER IF EXISTS GatchaImpact.UserCredentialsLogInsert;
+DROP TRIGGER IF EXISTS GatchaImpact.UserCredentialsLogUpdate;
+DROP TRIGGER IF EXISTS GatchaImpact.UserCredentialsLogDelete;
+
 -- -----------------------------------------------------
 -- Schema GatchaImpact
 -- -----------------------------------------------------
@@ -171,6 +176,41 @@ CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Active Quests` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- Custom table for storing changes in UserCredentials
+CREATE TABLE IF NOT EXISTS GatchaImpact.UserCredentialsChangeLog(
+    LogID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Action VARCHAR(255),
+    ActionTime TIMESTAMP,
+    OldUsername VARCHAR(50) DEFAULT NULL,
+    NewUsername VARCHAR(50) DEFAULT NULL,
+    OldPassword VARCHAR(50) DEFAULT NULL,
+    NewPassword VARCHAR(50) DEFAULT NULL
+)
+ENGINE = InnoDB;
+
+-- create trigger for insertion into UserCredentials table
+CREATE TRIGGER UserCredentialsLogInsert BEFORE INSERT ON GatchaImpact.usercredentials
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO GatchaImpact.UserCredentialsChangeLog(Action, ActionTime, NewUsername, NewPassword)
+        VALUES ('INSERT', NOW(), NEW.UserName, NEW.Password);
+    END;
+
+-- create trigger for updates to UserCredentials table
+CREATE TRIGGER UserCredentialsLogUpdate BEFORE UPDATE ON GatchaImpact.UserCredentials
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO GatchaImpact.UserCredentialsChangeLog(Action, ActionTime, OldUsername, NewUsername, OldPassword, NewPassword)
+        VALUES ('UPDATE', NOW(), OLD.UserName, NEW.UserName, OLD.Password, NEW.Password);
+    END;
+
+-- create trigger for deletion from UserCredentials table
+CREATE TRIGGER UserCredentialsLogDelete BEFORE DELETE ON GatchaImpact.UserCredentials
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO GatchaImpact.UserCredentialsChangeLog(Action, ActionTime, OldUsername, OldPassword)
+        VALUES ('DELETE', NOW(), OLD.UserName, OLD.Password);
+    END;
 
 SET SQL_MODE=1;
 SET FOREIGN_KEY_CHECKS=1;
