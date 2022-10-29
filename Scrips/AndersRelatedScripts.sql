@@ -1,6 +1,6 @@
 -- Create example users
 SELECT *
-FROM GatchaImpact.UserCredentialschangelog;
+FROM GatchaImpact.UserCredentialsChangelog;
 
 INSERT INTO GatchaImpact.UserCredentials
 VALUES ('Potteplante', 'Test123'),
