@@ -63,7 +63,7 @@ ENGINE = InnoDB;
 -- Table `GatchaImpact`.`NPC`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`NPC` (
-  `NPCID` INT NOT NULL,
+  `NPCID` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NULL,
   `Health` INT NULL,
   `Mana` INT NULL,
@@ -78,7 +78,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Inventory` (
   `IsPlayer` TINYINT NOT NULL,
   `EntityID` INT NOT NULL,
-  `ItemID` INT NOT NULL,
+  `ItemID` INT NOT NULL AUTO_INCREMENT,
   `Quantity` INT NULL,
   `MainHand` TINYINT NULL,
   `OffHand` TINYINT NULL,
@@ -108,7 +108,7 @@ ENGINE = InnoDB;
 -- Table `GatchaImpact`.`Boss`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Boss` (
-  `BossID` INT NOT NULL,
+  `BossID` INT NOT NULL AUTO_INCREMENT,
   `NPCID` INT NOT NULL,
   PRIMARY KEY (`BossID`),
   INDEX `fk_Boss_NPC_idx` (`NPCID` ASC) VISIBLE,
@@ -124,7 +124,7 @@ ENGINE = InnoDB;
 -- Table `GatchaImpact`.`Quests`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Quests` (
-  `QuestID` INT NOT NULL,
+  `QuestID` INT NOT NULL AUTO_INCREMENT,
   `NPCID` INT NULL,
   `PreviousQuest` INT NULL,
   `NextQuest` INT NULL,
