@@ -16,6 +16,15 @@ INSERT INTO gatchaimpact.npc(Name, Type, Health, Mana, Difficulity) VALUES
 ;
 
 
+-- Inventory Values
+
+INSERT INTO gatchaimpact.inventory(IsPlayer, EntityID, ItemID, Quantity, MainHand, OffHand, Armor) VALUES
+(1,1,1,10,0,0,0),
+(1,2,3,4,1,0,1)
+;
+
+SELECT * FROM gatchaimpact.inventory;
+
 -- Active Quests Values
 /*
 INSERT INTO gatchaimpact.`active quests`(PlayerID,QuestID) VALUES
@@ -26,3 +35,11 @@ INSERT INTO gatchaimpact.`active quests`(PlayerID,QuestID) VALUES
 SELECT * FROM gatchaimpact.`active quests`;
  */
 
+
+CREATE PROCEDURE createUser(IN userName VARCHAR(50) , IN userPWD VARCHAR(50))
+BEGIN
+    INSERT INTO gatchaimpact.usercredentials(UserName, Password) VALUES (userName, userPWD);
+END;
+
+
+CAll gatchaimpact.createUser('Trond Halvorsen', 'SekstiNi');
