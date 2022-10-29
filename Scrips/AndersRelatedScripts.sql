@@ -1,20 +1,22 @@
-
 -- Create example users
-SELECT * FROM gatchaimpact.usercredentialschangelog;
+SELECT *
+FROM GatchaImpact.UserCredentialschangelog;
 
-INSERT INTO gatchaimpact.usercredentials
+INSERT INTO GatchaImpact.UserCredentials
 VALUES ('Potteplante', 'Test123'),
        ('Space_Cat', 'BingusBangus');
 
-SELECT * FROM gatchaimpact.usercredentials;
+SELECT *
+FROM GatchaImpact.UserCredentials;
 
 -- Create example items
-INSERT INTO gatchaimpact.items(Name, Type, Damage, Value)
+INSERT INTO GatchaImpact.Items(Name, Type, Damage, Value)
 VALUES ('Stick', 'One-handed', 5, 1),
        ('Torch', 'One-handed', 10, 5),
        ('Longsword', 'Versatile', 50, 45);
 
-SELECT * FROM gatchaimpact.items;
+SELECT *
+FROM GatchaImpact.Items;
 
 -- Create new player for existing user:
 CREATE PROCEDURE CreatePlayer(
@@ -22,13 +24,14 @@ CREATE PROCEDURE CreatePlayer(
     IN PlayerName VARCHAR(50)
 )
 BEGIN
-    INSERT INTO gatchaimpact.player(UserName, PlayerName, Score, Money, Mana, QuestCompleteness)
+    INSERT INTO GatchaImpact.Player(UserName, PlayerName, Score, Money, Mana, QuestCompleteness)
         VALUE (UserName, PlayerName, 0, 100, 100, 0);
 END;
 
 CALL CreatePlayer('Potteplante', 'Goldfish');
 
-SELECT * FROM gatchaimpact.player;
+SELECT *
+FROM GatchaImpact.Player;
 
 -- Change password of existing user
 CREATE PROCEDURE ChangePassword(
@@ -38,22 +41,26 @@ CREATE PROCEDURE ChangePassword(
 )
 BEGIN
     -- Check if provided old password is correct:
-    IF (SELECT Password FROM gatchaimpact.usercredentials
-        WHERE usercredentials.UserName = SomeUserName) = OldPassword
+    IF (SELECT Password
+        FROM GatchaImpact.UserCredentials
+        WHERE UserCredentials.UserName = SomeUserName) = OldPassword
     THEN
         -- update password:
-        UPDATE gatchaimpact.usercredentials
-        SET usercredentials.Password = NewPassword
-        WHERE usercredentials.UserName = SomeUserName;
+        UPDATE GatchaImpact.UserCredentials
+        SET UserCredentials.Password = NewPassword
+        WHERE UserCredentials.UserName = SomeUserName;
     ELSE
         -- Signal error if old password didn't match existing user
         SIGNAL SQLSTATE '42000'
-        SET MESSAGE_TEXT = 'Provided invalid value for username or old password in ChangePassword procedure.';
+            SET MESSAGE_TEXT = 'Provided invalid value for username or old password in ChangePassword procedure.';
     END IF;
 END;
 
 CALL ChangePassword('Potteplante', 'Test123', 'SchmakerGodt');
 
-DELETE FROM usercredentials WHERE UserName = 'Potteplante';
+DELETE
+FROM UserCredentials
+WHERE UserName = 'Potteplante';
 
-SELECT * FROM usercredentials;
+SELECT *
+FROM UserCredentials;
