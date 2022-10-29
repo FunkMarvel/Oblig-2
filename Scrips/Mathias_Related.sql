@@ -68,17 +68,34 @@ It''s dangerus to go alone, take this!.. After you complete this quest!!', 2, 40
 
 
 
+DROP PROCEDURE IF EXISTS ChangeUsername;
 -- Change Username Procedure
 CREATE PROCEDURE ChangeUsername(
+    In OldUserName VARCHAR(50),
     IN NewUsername VARCHAR(50),
     IN CurrentPassword VARCHAR(50)
 )
 BEGIN
-    IF(SELECT Password FROM gatchaimpact.usercredentials WHERE Password = CurrentPassword)
+    IF(SELECT Password FROM gatchaimpact.usercredentials WHERE UserName = OldUserName) = CurrentPassword
     THEN
+        SET FOREIGN_KEY_CHECKS = 0;
+        UPDATE gatchaimpact.usercredentials
+        SET gatchaimpact.usercredentials.UserName = NewUsername
+        WHERE UserName = OldUserName;
+
+        UPDATE gatchaimpact.player
+        SET player.UserName = NewUsername
+        WHERE player.UserName = OldUserName;
+
+        SET FOREIGN_KEY_CHECKS = 1;
     ELSE
+        -- signal error
+        SIGNAL SQLSTATE '42000'
+        SET MESSAGE_TEXT = 'Provided password or username is inncorrect';
     END IF;
 END;
+
+CALL ChangeUsername('Space_Cat', 'math_moe', 'BingusBangus')
 
 
 --
