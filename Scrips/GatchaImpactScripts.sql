@@ -16,6 +16,7 @@ VALUES ('Darth Waker', 'Potteplante', 0,  15000, 100, 52),
        ('Mark Sukkerberg', 'Potteplante', 15, 1,1 , 1);
 
 
+
 -- Create example Quests
 INSERT INTO gatchaimpact.quests(NPCID, PreviousQuest, NextQuest, QuestDescription, QuestRewardItemID, QuestRewardMoneyAmount)
 VALUES (0, NULL, 1, 'You cannot handle my strongest Potions', 2, 500),
@@ -30,6 +31,7 @@ The most important step a man can take. It''s not the first one, is it?It''s the
 (4, NULL, 5, 'You cannot handle my strongest Potions', 2, 500);
 
 
+
 -- Create example ActiveQuests
 
 INSERT INTO gatchaimpact.`active quests`(PlayerID, QuestID)
@@ -41,6 +43,12 @@ VALUES (0,0), -- p1
        (2,3),
        (3,3), -- p4
        (3,4);
+
+-- Create exampke ActiveQuests
+
+ -- INSERT INTO gatchaimpact.items(Type, Damage, Value)
+ -- VALUES ('Stick', 5, )
+
 
 
 
