@@ -43,3 +43,48 @@ END;
 
 
 CAll gatchaimpact.createUser('Trond Halvorsen', 'SekstiNi');
+
+
+
+/* -- scrap this shit
+CREATE VIEW viewUsers AS
+SELECT ALL UserName from usercredentials
+INNER RIGHT JOIN PlayerID from gatcha.playerID;
+;*/
+
+/*
+CREATE VIEW viewUsersAndPlayers
+SELECT UserName FROM usercredentials
+UNION
+Select PlayerID From player;
+ */
+
+/* -- funker ikke :(
+CREATE VIEW viewUsers AS
+SELECT PlayerName, UserName
+FROM gatchaimpact.player, gatchaimpact.usercredentials
+WHERE  gatchaimpact.usercredentials.UserName = gatchaimpact.player.PlayerName;
+ */
+
+
+CREATE VIEW rumpe AS
+SELECT gatchaimpact.usercredentials.UserName, gatchaimpact.player.PlayerName
+
+FROM gatchaimpact.usercredentials, gatchaimpact.player
+WHERE gatchaimpact.usercredentials.UserName NOT LIKE gatchaimpact.player.PlayerName;
+DROP VIEW rumpe;
+
+CREATE VIEW viewUsers AS
+    SELECT gatchaimpact.player.PlayerID AS spillerID, gatchaimpact.player.PlayerName AS SpillerNavn, gatchaimpact.usercredentials.UserName AS Brukernavn
+
+    FROM gatchaimpact.player, gatchaimpact.usercredentials
+
+JOIN spillerID
+;
+
+
+DROP VIEW viewUsers;
+SELECT * FROM gatchaimpact.viewusers;
+
+
+select * from gatchaimpact.rumpe;
