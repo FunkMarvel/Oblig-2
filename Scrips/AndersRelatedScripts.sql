@@ -15,5 +15,10 @@ VALUES ('Stick', 'One-handed', 5, 1),
 SELECT * FROM gatchaimpact.items;
 
 CREATE PROCEDURE CreatePlayer(
-    @UserName VARCHAR(50),
+    IN UserName VARCHAR(50),
+    IN PlayerName VARCHAR(50)
 )
+BEGIN
+    INSERT INTO gatchaimpact.player(UserName, PlayerName, Score, Money, Mana, QuestCompleteness)
+        VALUE (UserName, PlayerName, )
+END;
