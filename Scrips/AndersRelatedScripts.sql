@@ -14,11 +14,39 @@ VALUES ('Stick', 'One-handed', 5, 1),
 
 SELECT * FROM gatchaimpact.items;
 
+-- Create new player for existing user:
 CREATE PROCEDURE CreatePlayer(
     IN UserName VARCHAR(50),
     IN PlayerName VARCHAR(50)
 )
 BEGIN
     INSERT INTO gatchaimpact.player(UserName, PlayerName, Score, Money, Mana, QuestCompleteness)
-        VALUE (UserName, PlayerName, )
+        VALUE (UserName, PlayerName, 0, 100, 100, 0);
 END;
+
+CALL CreatePlayer('Potteplante', 'Goldfish');
+
+SELECT * FROM gatchaimpact.player;
+
+-- Create new
+CREATE PROCEDURE ChangePassword(
+    IN SomeUserName VARCHAR(50),
+    IN OldPassword VARCHAR(50),
+    IN NewPassword VARCHAR(50)
+)
+BEGIN
+    IF (SELECT Password FROM gatchaimpact.usercredentials
+        WHERE usercredentials.UserName = SomeUserName) = OldPassword
+    THEN
+        UPDATE gatchaimpact.usercredentials
+        SET usercredentials.Password = NewPassword
+        WHERE usercredentials.UserName = SomeUserName;
+    ELSE
+        SIGNAL SQLSTATE '42000'
+        SET MESSAGE_TEXT = 'Provided invalid value for old password.';
+    END IF;
+END;
+
+CALL ChangePassword('Potteplante', 'Test123', 'SchmakerGodt');
+
+SELECT * FROM usercredentials;
