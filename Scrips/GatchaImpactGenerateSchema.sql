@@ -33,7 +33,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Player` (
   `PlayerID` INT NOT NULL AUTO_INCREMENT,
   `UserName` VARCHAR(50) NOT NULL,
-  `ScoreBoardID` VARCHAR(45) NULL,
+  `ScoreBoardID` INT NULL,
   `Money` INT NULL,
   `Mana` INT NULL,
   `QuestCompleteness` FLOAT NULL,
