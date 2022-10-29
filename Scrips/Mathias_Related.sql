@@ -40,6 +40,8 @@ VALUES (1,1), -- p1
        (4,7), -- p4
        (4,8);
 
+
+
 -- Find all active quests to all players'
 -- Hensikt: en administrator / eller utvikler for spillet kan se alle spilleres quests
 SELECT p.UserName, `active quests`.QuestID FROM `active quests`
@@ -48,19 +50,20 @@ ORDER BY p.UserName;
 
 
 -- How many players has a quest?
--- Hensikt: Administrator / uvikler
+-- Hensikt: Administrator / uvikler kan se hvor mange som har samme quest
 SELECT COUNT(*) as Instances, `active quests`.QuestID FROM `active quests`
 JOIN player p ON p.PlayerID = `active quests`.PlayerID
 GROUP BY `active quests`.QuestID;
 
 -- Find all active quests for a player
--- Hennsikten her er at en spiller kan kunne se alle sine Active Quests i en ingame menu
+-- Hennsikt: en spiller kan kunne se alle sine Active Quests i en ingame menu
 SELECT p.PlayerName, p.PlayerID as PID, `active quests`.QuestID FROM `active quests`
     JOIN player p ON p.PlayerID = `active quests`.PlayerID
 WHERE p.PlayerName = 'Darth Waker';
 
 
 -- Insert new quest
+-- Hensikt: Legg til en ny quest
 INSERT INTO quests (NPCID, PreviousQuest, NextQuest, QuestDescription, QuestRewardItemID, QuestRewardMoneyAmount)
 VALUES
     (2, NULL, NULL, 'Some Grandpa:
