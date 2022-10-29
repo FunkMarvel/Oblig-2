@@ -37,4 +37,10 @@ VALUES (0,0), -- p1
        (3,4);
 
 -- Find all active quests to a player
-SELECT * FROM `active quests` WHERE PlayerID = 0;
+SELECT  FROM `active quests` WHERE PlayerID = 0;
+
+# INSERT INTO player(PlayerName, UserName, ScoreBoardID,Money, Mana,QuestCompleteness)
+# SELECT 'Joe The Student', id_teacher
+# FROM usercredentials
+# WHERE name_teacher = 'Professor Jack'
+# LIMIT 1
