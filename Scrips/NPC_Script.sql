@@ -22,8 +22,25 @@ INSERT INTO gatchaimpact.inventory(IsPlayer, EntityID, ItemID, Quantity, MainHan
 (1,1,1,10,0,0,0),
 (1,2,3,4,1,0,1)
 ;
-
 SELECT * FROM gatchaimpact.inventory;
+
+
+-- view for npc inventory
+-- kan utvides?
+CREATE PROCEDURE displayInventory(IN playerID INT)
+    BEGIN
+        SELECT * FROM inventory where playerID = EntityID;
+    END;
+DROP PROCEDURE displayInventory;
+CALL displayInventory(2);
+
+/* DELETEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+CREATE VIEW DisplayGamers AS
+    SELECT u.UserName, player.PlayerName, PlayerID playerid
+    FROM player
+    JOIN usercredentials u on player.UserName = u.UserName;
+ */
+
 
 -- Active Quests Values
 /*
@@ -126,3 +143,22 @@ CREATE VIEW DisplayGamers AS
 DROP VIEW DisplayGamers;
 
 SELECT * FROM DisplayGamers;
+
+
+-- Update NPCs / Create new NPC's
+
+CREATE PROCEDURE createNPC(IN Name VARCHAR(50), IN Type VARCHAR(45), IN Health INT, IN Mana INT, IN Difficulity INT )
+BEGIN
+
+    INSERT INTO gatchaimpact.npc(Name, Type, Health, Mana, Difficulity) VALUES(Name, Type, Health, Mana, Difficulity);
+
+
+END;
+
+DROP PROCEDURE createNPC;
+CALL createNPC('Einar', 'Datamaskin', 27,11,13);
+
+
+CALL createNPC('   ', 'Call createNPC("11",11,11,11,11)', -13,-11,-13);
+
+SELECT * FROM npc;
