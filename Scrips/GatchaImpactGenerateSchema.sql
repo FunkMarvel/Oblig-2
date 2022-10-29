@@ -52,7 +52,7 @@ ENGINE = InnoDB;
 -- Table `GatchaImpact`.`Items`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Items` (
-  `ItemID` INT NOT NULL,
+  `ItemID` INT NOT NULL AUTO_INCREMENT,
   `Damage` FLOAT NULL,
   `Type` VARCHAR(45) NULL,
   `Value` INT NULL,
@@ -79,7 +79,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Inventory` (
   `IsPlayer` TINYINT NOT NULL,
   `EntityID` INT NOT NULL,
-  `ItemID` INT NOT NULL AUTO_INCREMENT,
+  `ItemID` INT NOT NULL,
   `Quantity` INT NULL,
   `MainHand` TINYINT NULL,
   `OffHand` TINYINT NULL,
