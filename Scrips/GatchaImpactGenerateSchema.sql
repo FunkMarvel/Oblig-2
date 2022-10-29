@@ -1,3 +1,5 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -29,7 +31,7 @@ ENGINE = InnoDB;
 -- Table `GatchaImpact`.`Player`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Player` (
-  `PlayerID` INT NOT NULL,
+  `PlayerID` INT NOT NULL AUTO_INCREMENT,
   `UserName` VARCHAR(50) NOT NULL,
   `ScoreBoardID` VARCHAR(45) NULL,
   `Money` INT NULL,
