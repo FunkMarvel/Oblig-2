@@ -12,8 +12,8 @@ Insert into gatchaimpact.player(PlayerName, UserName, ScoreBoardID,Money, Mana,Q
 VALUES ('Darth Waker', 'Potteplante', 0,  15000, 100, 52),
        ('Mark Blader','Space_Cat', 1, 150, 20, 1),
        ('Park Ranger', 'Potteplante', 2, 4200, 1000, 75),
-       ('Ainz Flager', 'Space_Cat', 3, 100000, 1500, 99),
-       ('Potteplante', 'Mark Sukkerberg', 15, 1,1 , 1);
+       -- ('Ainz Flager', 'Space_Cat', 3, 100000, 1500, 99),
+       ('Mark Sukkerberg', 'Potteplante', 15, 1,1 , 1);
 
 
 -- Create example Quests
@@ -30,8 +30,17 @@ The most important step a man can take. It''s not the first one, is it?It''s the
 (4, NULL, 5, 'You cannot handle my strongest Potions', 2, 500);
 
 
--- Create exampke ActiveQuests
+-- Create example ActiveQuests
 
+INSERT INTO gatchaimpact.`active quests`(PlayerID, QuestID)
+VALUES (0,0), -- p1
+       (0,1),
+       (1,1), -- p2
+       (1,2),
+       (2,2), -- p3
+       (2,3),
+       (3,3), -- p4
+       (3,4);
 
 
 
