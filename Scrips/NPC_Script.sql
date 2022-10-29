@@ -67,13 +67,17 @@ WHERE  gatchaimpact.usercredentials.UserName = gatchaimpact.player.PlayerName;
  */
 
 
+
+/*
 CREATE VIEW rumpe AS
 SELECT gatchaimpact.usercredentials.UserName, gatchaimpact.player.PlayerName
 
 FROM gatchaimpact.usercredentials, gatchaimpact.player
 WHERE gatchaimpact.usercredentials.UserName NOT LIKE gatchaimpact.player.PlayerName;
 DROP VIEW rumpe;
+ */
 
+/*
 CREATE VIEW viewUsers AS
     SELECT gatchaimpact.player.PlayerID AS spillerID, gatchaimpact.player.PlayerName AS SpillerNavn, gatchaimpact.usercredentials.UserName AS Brukernavn
 
@@ -88,3 +92,37 @@ SELECT * FROM gatchaimpact.viewusers;
 
 
 select * from gatchaimpact.rumpe;
+ */
+
+
+
+
+/*
+SELECT gatchaimpact.player.PlayerID AS spillerID,
+       gatchaimpact.player.PlayerName AS SpillerNavn,
+       gatchaimpact.usercredentials.UserName AS Brukernavn
+
+    FROM gatchaimpact.player, gatchaimpact.usercredentials
+
+JOIN gatchaimpact.player ON PlayerName = usercredentials.UserName
+;
+*/
+
+/*
+CREATE VIEW DisplayPlayers AS
+SELECT player.PlayerName, u.UserName, PlayerID pId
+FROM player
+JOIN usercredentials u ON u.UserName = player.UserName;
+
+DROP VIEW DisplayPlayers;
+ */
+
+
+CREATE VIEW DisplayGamers AS
+    SELECT u.UserName, player.PlayerName, PlayerID playerid
+    FROM player
+    JOIN usercredentials u on player.UserName = u.UserName;
+
+DROP VIEW DisplayGamers;
+
+SELECT * FROM DisplayGamers;

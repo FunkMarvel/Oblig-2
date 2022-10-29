@@ -40,6 +40,8 @@ VALUES (1,1), -- p1
        (4,7), -- p4
        (4,8);
 
+
+
 -- Find all active quests to all players'
 -- Hensikt: en administrator / eller utvikler for spillet kan se alle spilleres quests
 SELECT p.UserName, `active quests`.QuestID FROM `active quests`
@@ -48,18 +50,61 @@ ORDER BY p.UserName;
 
 
 -- How many players has a quest?
--- Hensikt: Administrator / uvikler
+-- Hensikt: Administrator / uvikler kan se hvor mange som har samme quest
 SELECT COUNT(*) as Instances, `active quests`.QuestID FROM `active quests`
 JOIN player p ON p.PlayerID = `active quests`.PlayerID
 GROUP BY `active quests`.QuestID;
 
 -- Find all active quests for a player
--- Hennsikten her er at en spiller kan kunne se alle sine Active Quests i en ingame menu
-SELECT p.PlayerName, p.PlayerID as PID, `active quests`.QuestID From `active quests`
+-- Hennsikt: en spiller kan kunne se alle sine Active Quests i en ingame menu
+SELECT p.PlayerName, p.PlayerID as PID, `active quests`.QuestID FROM `active quests`
     JOIN player p ON p.PlayerID = `active quests`.PlayerID
 WHERE p.PlayerName = 'Darth Waker';
 
 
+-- Insert new quest
+-- Hensikt: Legg til en ny quest
+INSERT INTO quests (NPCID, PreviousQuest, NextQuest, QuestDescription, QuestRewardItemID, QuestRewardMoneyAmount)
+VALUES
+    (2, NULL, NULL, 'Some Grandpa:
+It''s dangerus to go alone, take this!.. After you complete this quest!!', 2, 40);
+
+
+
+DROP PROCEDURE IF EXISTS ChangeUsername;
+-- Change Username Procedure
+CREATE PROCEDURE ChangeUsername(
+    In OldUserName VARCHAR(50),
+    IN NewUsername VARCHAR(50),
+    IN CurrentPassword VARCHAR(50)
+)
+BEGIN
+    IF(SELECT Password FROM gatchaimpact.usercredentials WHERE UserName = OldUserName) = CurrentPassword
+    THEN
+        SET FOREIGN_KEY_CHECKS = 0;
+        UPDATE gatchaimpact.usercredentials
+        SET gatchaimpact.usercredentials.UserName = NewUsername
+        WHERE UserName = OldUserName;
+
+        UPDATE gatchaimpact.player
+        SET player.UserName = NewUsername
+        WHERE player.UserName = OldUserName;
+
+        SET FOREIGN_KEY_CHECKS = 1;
+    ELSE
+        -- signal error
+        SIGNAL SQLSTATE '42000'
+        SET MESSAGE_TEXT = 'Provided password or username is inncorrect';
+    END IF;
+END;
+
+CALL ChangeUsername('Space_Cat', 'math_moe', 'BingusBangus')
+
+
+--
+# SELECT *
+# FROM player
+# JOIN usercredentials u ON u.UserName = player.UserName;
 
 # INSERT INTO player(PlayerName, UserName, ScoreBoardID,Money, Mana,QuestCompleteness)
 # SELECT 'Joe The Student', id_teacher
