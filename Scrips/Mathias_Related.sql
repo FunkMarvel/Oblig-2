@@ -1,6 +1,6 @@
 
 -- Create example Players
-Insert into gatchaimpact.player(PlayerName, UserName, Score,Money, Mana,QuestCompleteness)
+Insert into GatchaImpact.player(PlayerName, UserName, Score,Money, Mana,QuestCompleteness)
 VALUES ('Darth Waker', 'Potteplante', 0,  15000, 100, 52),
        ('Mark Blader','Space_Cat', 1, 150, 20, 1),
        ('Park Ranger', 'Potteplante', 2, 4200, 1000, 75),
@@ -10,7 +10,7 @@ VALUES ('Darth Waker', 'Potteplante', 0,  15000, 100, 52),
 
 
 -- Create example Quests
-INSERT INTO gatchaimpact.quests(NPCID, PreviousQuest, NextQuest, QuestDescription, QuestRewardItemID, QuestRewardMoneyAmount)
+INSERT INTO GatchaImpact.quests(NPCID, PreviousQuest, NextQuest, QuestDescription, QuestRewardItemID, QuestRewardMoneyAmount)
 VALUES (1, NULL, 1, 'You cannot handle my strongest Potions', 2, 500),
        (2, NULL, 1, 'Mankar Camoran:
 So, the cat''s-paw of the Septims arrives at last. You didn''t think me unawares? Here of all places, in the paradise that I created? Look now, upon my paradise, Gaiar Alata, in the old tongue, a vision of the past... and the future.', 2, 500),
@@ -30,7 +30,7 @@ The most important step a man can take. It''s not the first one, is it?It''s the
 
 -- Create example ActiveQuests
 
-INSERT INTO gatchaimpact.`active quests`(PlayerID, QuestID)
+INSERT INTO GatchaImpact.ActiveQuests(PlayerID, QuestID)
 VALUES (1,1), -- p1
        (1,2),
        (2,1), -- p2
@@ -42,23 +42,23 @@ VALUES (1,1), -- p1
 
 
 
--- Find all active quests to all players'
+-- Find all ActiveQuests to all players'
 -- Hensikt: en administrator / eller utvikler for spillet kan se alle spilleres quests
-SELECT p.UserName, `active quests`.QuestID FROM `active quests`
-JOIN player p ON p.PlayerID = `active quests`.PlayerID
+SELECT p.UserName, QuestID FROM ActiveQuests
+JOIN player p ON p.PlayerID = ActiveQuests.PlayerID
 ORDER BY p.UserName;
 
 
 -- How many players has a quest?
 -- Hensikt: Administrator / uvikler kan se hvor mange som har samme quest
-SELECT COUNT(*) as Instances, `active quests`.QuestID FROM `active quests`
-JOIN player p ON p.PlayerID = `active quests`.PlayerID
-GROUP BY `active quests`.QuestID;
+SELECT COUNT(*) as Instances, `ActiveQuests`.QuestID FROM `ActiveQuests`
+JOIN player p ON p.PlayerID = `ActiveQuests`.PlayerID
+GROUP BY `ActiveQuests`.QuestID;
 
--- Find all active quests for a player
--- Hennsikt: en spiller kan kunne se alle sine Active Quests i en ingame menu
-SELECT p.PlayerName, p.PlayerID as PID, `active quests`.QuestID FROM `active quests`
-    JOIN player p ON p.PlayerID = `active quests`.PlayerID
+-- Find all ActiveQuests for a player
+-- Hennsikt: en spiller kan kunne se alle sine ActiveQuests i en ingame menu
+SELECT p.PlayerName, p.PlayerID as PID, `ActiveQuests`.QuestID FROM `ActiveQuests`
+    JOIN player p ON p.PlayerID = `ActiveQuests`.PlayerID
 WHERE p.PlayerName = 'Darth Waker';
 
 
@@ -79,14 +79,14 @@ CREATE PROCEDURE ChangeUsername(
     IN CurrentPassword VARCHAR(50)
 )
 BEGIN
-    IF(SELECT Password FROM gatchaimpact.usercredentials WHERE UserName = OldUserName) = CurrentPassword
+    IF(SELECT Password FROM GatchaImpact.usercredentials WHERE UserName = OldUserName) = CurrentPassword
     THEN
         SET FOREIGN_KEY_CHECKS = 0;
-        UPDATE gatchaimpact.usercredentials
-        SET gatchaimpact.usercredentials.UserName = NewUsername
+        UPDATE GatchaImpact.usercredentials
+        SET GatchaImpact.usercredentials.UserName = NewUsername
         WHERE UserName = OldUserName;
 
-        UPDATE gatchaimpact.player
+        UPDATE GatchaImpact.player
         SET player.UserName = NewUsername
         WHERE player.UserName = OldUserName;
 
