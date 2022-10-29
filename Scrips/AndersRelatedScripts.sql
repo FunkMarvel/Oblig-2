@@ -14,3 +14,6 @@ VALUES ('Stick', 'One-handed', 5, 1),
 
 SELECT * FROM gatchaimpact.items;
 
+CREATE PROCEDURE CreatePlayer(
+    @UserName VARCHAR(50),
+)
