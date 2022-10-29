@@ -17,7 +17,8 @@ VALUES ('Darth Waker', 'Potteplante', 0,  15000, 100, 52),
        ('Park Ranger', 'Potteplante', 2, 4200, 1000, 75),
        ('Ainz Flager', 'Space_Cat', 3, 100000, 1500, 99);
 
-
+ -- INSERT INTO gatchaimpact.items(Type, Damage, Value)
+ -- VALUES ('Stick', 5, )
 
 
 
