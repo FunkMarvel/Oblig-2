@@ -26,13 +26,13 @@ SELECT * FROM gatchaimpact.inventory;
 
 
 -- view for npc inventory
--- kan utvides?
-CREATE PROCEDURE displayInventory(IN playerID INT)
+-- kan utvides? ble søppel my bad
+CREATE PROCEDURE displayNPCInventory(IN playerID INT)
     BEGIN
-        SELECT * FROM inventory where playerID = EntityID;
+        SELECT * FROM inventory where playerID = EntityID AND IsPlayer = 1;
     END;
-DROP PROCEDURE displayInventory;
-CALL displayInventory(2);
+DROP PROCEDURE displayNPCInventory;
+CALL displayNPCInventory(2);
 
 /* DELETEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 CREATE VIEW DisplayGamers AS
