@@ -1,7 +1,7 @@
 
 -- Create example Players
 Insert into gatchaimpact.player(PlayerName, UserName, ScoreBoardID,Money, Mana,QuestCompleteness)
-VALUES ('Darth Waker', 'Potteplante', 0,  15000, 100, 52),
+VALUES ('Darth Waker', 'Potteplantee', 0,  15000, 100, 52),
        ('Mark Blader','Space_Cat', 1, 150, 20, 1),
        ('Park Ranger', 'Potteplante', 2, 4200, 1000, 75),
        -- ('Ainz Flager', 'Space_Cat', 3, 100000, 1500, 99),
@@ -36,4 +36,11 @@ VALUES (0,0), -- p1
        (3,3), -- p4
        (3,4);
 
--- Create exampke ActiveQuests
+-- Find all active quests to a player
+SELECT  FROM `active quests` WHERE PlayerID = 0;
+
+# INSERT INTO player(PlayerName, UserName, ScoreBoardID,Money, Mana,QuestCompleteness)
+# SELECT 'Joe The Student', id_teacher
+# FROM usercredentials
+# WHERE name_teacher = 'Professor Jack'
+# LIMIT 1
