@@ -3,6 +3,8 @@
 
 -- NPC VALUES
 
+SELECT * FROM npc;
+
 INSERT INTO gatchaimpact.npc(Name, Type, Health, Mana, Difficulity) VALUES
 ("Arne Hole", "Mathmagician", 1000, 9001, 9),
 ("Harry Hole", "Proffesional Alcohol drinker", 50, 24, 1),
