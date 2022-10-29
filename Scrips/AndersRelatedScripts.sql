@@ -1,5 +1,7 @@
 
 -- Create example users
+SELECT * FROM gatchaimpact.usercredentialschangelog;
+
 INSERT INTO gatchaimpact.usercredentials
 VALUES ('Potteplante', 'Test123'),
        ('Space_Cat', 'BingusBangus');
@@ -51,5 +53,7 @@ BEGIN
 END;
 
 CALL ChangePassword('Potteplante', 'Test123', 'SchmakerGodt');
+
+DELETE FROM usercredentials WHERE UserName = 'Potteplante';
 
 SELECT * FROM usercredentials;
