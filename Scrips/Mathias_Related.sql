@@ -55,11 +55,36 @@ GROUP BY `active quests`.QuestID;
 
 -- Find all active quests for a player
 -- Hennsikten her er at en spiller kan kunne se alle sine Active Quests i en ingame menu
-SELECT p.PlayerName, p.PlayerID as PID, `active quests`.QuestID From `active quests`
+SELECT p.PlayerName, p.PlayerID as PID, `active quests`.QuestID FROM `active quests`
     JOIN player p ON p.PlayerID = `active quests`.PlayerID
 WHERE p.PlayerName = 'Darth Waker';
 
 
+-- Insert new quest
+INSERT INTO quests (NPCID, PreviousQuest, NextQuest, QuestDescription, QuestRewardItemID, QuestRewardMoneyAmount)
+VALUES
+    (2, NULL, NULL, 'Some Grandpa:
+It''s dangerus to go alone, take this!.. After you complete this quest!!', 2, 40);
+
+
+
+-- Change Username Procedure
+CREATE PROCEDURE ChangeUsername(
+    IN NewUsername VARCHAR(50),
+    IN CurrentPassword VARCHAR(50)
+)
+BEGIN
+    IF(SELECT Password FROM gatchaimpact.usercredentials WHERE Password = CurrentPassword)
+    THEN
+    ELSE
+    END IF;
+END;
+
+
+--
+# SELECT *
+# FROM player
+# JOIN usercredentials u ON u.UserName = player.UserName;
 
 # INSERT INTO player(PlayerName, UserName, ScoreBoardID,Money, Mana,QuestCompleteness)
 # SELECT 'Joe The Student', id_teacher
