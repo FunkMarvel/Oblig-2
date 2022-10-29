@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Quests` (
   `NPCID` INT NULL,
   `PreviousQuest` INT NULL,
   `NextQuest` INT NULL,
-  `QuestDescription` VARCHAR(50) NOT NULL,
+  `QuestDescription` VARCHAR(500) NOT NULL,
   `QuestRewardItemID` INT NULL,
   `QuestRewardMoneyAmount` INT NULL,
   PRIMARY KEY (`QuestID`),
