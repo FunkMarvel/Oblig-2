@@ -53,8 +53,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`Items` (
   `ItemID` INT NOT NULL AUTO_INCREMENT,
-  `Damage` FLOAT NULL,
+  `Name` VARCHAR(50) NOT NULL,
   `Type` VARCHAR(45) NULL,
+  `Damage` FLOAT NULL,
   `Value` INT NULL,
   PRIMARY KEY (`ItemID`))
 ENGINE = InnoDB;

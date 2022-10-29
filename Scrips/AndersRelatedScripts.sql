@@ -7,9 +7,10 @@ VALUES ('Potteplante', 'Test123'),
 -- Check userCredentials table
 SELECT * FROM gatchaimpact.usercredentials;
 
- -- INSERT INTO gatchaimpact.items(Type, Damage, Value)
- -- VALUES ('Stick', 5, )
-
+-- Create example items
+INSERT INTO gatchaimpact.items(Type, Damage, Value)
+VALUES ('Stick', 5, 1),
+       ('Torch', 10, 5);
 
 
 
