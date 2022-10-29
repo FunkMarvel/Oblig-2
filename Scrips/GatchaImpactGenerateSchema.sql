@@ -65,6 +65,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GatchaImpact`.`NPC` (
   `NPCID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(50) NOT NULL,
   `Type` VARCHAR(45) NULL,
   `Health` INT NULL,
   `Mana` INT NULL,
