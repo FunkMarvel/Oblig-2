@@ -76,8 +76,10 @@ DROP VIEW rumpe;
 
 CREATE VIEW viewUsers AS
     SELECT gatchaimpact.player.PlayerID AS spillerID, gatchaimpact.player.PlayerName AS SpillerNavn, gatchaimpact.usercredentials.UserName AS Brukernavn
-FROM gatchaimpact.player, gatchaimpact.usercredentials
 
+    FROM gatchaimpact.player, gatchaimpact.usercredentials
+
+JOIN spillerID
 ;
 
 
