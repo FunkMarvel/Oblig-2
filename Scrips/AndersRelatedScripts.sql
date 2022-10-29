@@ -28,22 +28,25 @@ CALL CreatePlayer('Potteplante', 'Goldfish');
 
 SELECT * FROM gatchaimpact.player;
 
--- Create new
+-- Change password of existing user
 CREATE PROCEDURE ChangePassword(
     IN SomeUserName VARCHAR(50),
     IN OldPassword VARCHAR(50),
     IN NewPassword VARCHAR(50)
 )
 BEGIN
+    -- Check if provided old password is correct:
     IF (SELECT Password FROM gatchaimpact.usercredentials
         WHERE usercredentials.UserName = SomeUserName) = OldPassword
     THEN
+        -- update password:
         UPDATE gatchaimpact.usercredentials
         SET usercredentials.Password = NewPassword
         WHERE usercredentials.UserName = SomeUserName;
     ELSE
+        -- Signal error if old password didn't match existing user
         SIGNAL SQLSTATE '42000'
-        SET MESSAGE_TEXT = 'Provided invalid value for old password.';
+        SET MESSAGE_TEXT = 'Provided invalid value for username or old password in ChangePassword procedure.';
     END IF;
 END;
 
