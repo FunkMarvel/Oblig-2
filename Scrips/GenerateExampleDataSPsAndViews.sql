@@ -133,8 +133,8 @@ BEGIN
 END;
 
 -- SP to display inventory
-DROP PROCEDURE IF EXISTS displayNPCInventory;
-CREATE PROCEDURE displayNPCInventory(IN playerID INT)
+DROP PROCEDURE IF EXISTS displayPlayerInventory;
+CREATE PROCEDURE displayPlayerInventory(IN playerID INT)
 BEGIN
     SELECT * FROM inventory WHERE playerID = EntityID AND IsPlayer = 1;
 END;

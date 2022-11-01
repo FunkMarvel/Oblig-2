@@ -7,7 +7,6 @@ FROM ActiveQuests
          JOIN player p ON p.PlayerID = ActiveQuests.PlayerID
 ORDER BY p.UserName;
 
-
 -- How many players has a quest?
 -- Hensikt: Administrator / utvikler kan se hvor mange som har samme quest
 SELECT COUNT(*) AS Instances, `ActiveQuests`.QuestID
@@ -21,7 +20,6 @@ SELECT p.PlayerName, p.PlayerID AS PID, `ActiveQuests`.QuestID
 FROM `ActiveQuests`
          JOIN player p ON p.PlayerID = `ActiveQuests`.PlayerID
 WHERE p.PlayerName = 'Darth Waker';
-
 
 -- Insert new quest
 -- Hensikt: Legg til en ny quest
