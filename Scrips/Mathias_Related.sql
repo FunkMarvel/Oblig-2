@@ -31,7 +31,6 @@ You cannot handle my strongest Potions', 2, 500);
 
 
 -- Create example ActiveQuests
-
 INSERT INTO GatchaImpact.ActiveQuests(PlayerID, QuestID)
 VALUES (1,1), -- p1
        (1,2),
@@ -96,7 +95,7 @@ BEGIN
     ELSE
         -- signal error
         SIGNAL SQLSTATE '42000'
-        SET MESSAGE_TEXT = 'Provided password or username is inncorrect';
+        SET MESSAGE_TEXT = 'Provided password or username is incorrect';
     END IF;
 END;
 
