@@ -66,6 +66,13 @@ VALUES (1, 1), -- p1
        (4, 7), -- p4
        (4, 8);
 
+-- Populate boss table:
+Insert into gatchaimpact.boss(NPCID)
+value (1),
+    (1),
+    (6),
+    (4);
+
 -- Below: creation of stored procedures and views
 -- SP to create user:
 DROP PROCEDURE IF EXISTS createUser;
